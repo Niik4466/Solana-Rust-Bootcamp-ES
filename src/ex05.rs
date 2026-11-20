@@ -15,12 +15,14 @@ impl Account {
     ///
     /// El dueño de una cuenta nueva es el programa `"system"`.
     pub fn new(address: String) -> Self {
-        todo!()
+        let lamports: u64 = 0;
+        let owner: String = String::from("system");
+        Self { owner, address, lamports }
     }
 
     /// Agrega lamports a la cuenta.
     pub fn deposit(&mut self, amount: u64) {
-        todo!()
+        self.lamports+=amount;
     }
 
     /// Retira lamports de la cuenta.
@@ -28,7 +30,9 @@ impl Account {
     /// Retorna `true` cuando el retiro fue exitoso. Retorna `false` y deja el
     /// saldo sin cambios cuando no hay suficientes lamports.
     pub fn withdraw(&mut self, amount: u64) -> bool {
-        todo!()
+        if self.lamports < amount { return false; }
+        self.lamports-=amount;
+        true
     }
 
     /// Retorna el saldo en SOL enteros, descartando el residuo.
@@ -36,6 +40,6 @@ impl Account {
     /// Esto es solo para mostrar. Nunca uses un número de punto flotante para
     /// dinero.
     pub fn balance_in_sol(&self) -> u64 {
-        todo!()
+        self.lamports / 1000000000
     }
 }
